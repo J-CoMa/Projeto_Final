@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include './includes/config.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $book_id = $_POST['book_id'];
     $title = $_POST['title'];
@@ -18,7 +18,7 @@ isbn='$isbn' WHERE book_id=$book_id";
     $book_id = $_GET['id'];
     $sql = "SELECT * FROM t_book WHERE book_id=$book_id";
     $result = $conn->query($sql);
-    $livro = $result->fetch_assoc();
+    $book = $result->fetch_assoc();
 }
 $conn->close();
 ?>
@@ -32,15 +32,15 @@ $conn->close();
 <body>
     <h1>Edit Book</h1>
     <form method="POST" action="">
-        <input type="hidden" name="book_id" value="<?php echo $t_book['book_id']; ?>">
+        <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
         <label>Title:</label><br>
-        <input type="text" name="title" value="<?php echo $t_book['title']; ?>" required><br>
+        <input type="text" name="title" value="<?php echo $book['title']; ?>" required><br>
         <label>Genre:</label><br>
-        <input type="text" name="genre" value="<?php echo $t_book['genre']; ?>"><br>
+        <input type="text" name="genre" value="<?php echo $book['genre']; ?>"><br>
         <label>Publish Year:</label><br>
-        <input type="number" name="publish_year" value="<?php echo $t_book['publish_year']; ?>"><br>
+        <input type="number" name="publish_year" value="<?php echo $book['publish_year']; ?>"><br>
         <label>ISBN:</label><br>
-        <input type="text" name="isbn" value="<?php echo $t_book['isbn']; ?>" required><br><br>
+        <input type="text" name="isbn" value="<?php echo $book['isbn']; ?>" required><br><br>
         <input type="submit" value="Update">
     </form>
     <a href="list_books.php">Return to the Book List</a>

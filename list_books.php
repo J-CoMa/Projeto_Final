@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include './includes/config.php';
 $sql = "SELECT * FROM t_book";
 $result = $conn->query($sql);
 ?>
