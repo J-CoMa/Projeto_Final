@@ -1,97 +1,61 @@
-@import url('https://fonts.googleapis.com/css?family=Numans');
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fontlibrary.org//face/cmu-serif');
 
-html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-height: 100%;
-font-family: 'Numans', sans-serif;
+.serif-font {
+    font-family: "CMUSerifRoman", serif;;
 }
 
-.login-logo{
-    position: absolute;
-    font-family: "Courgette", cursive;
-    font-size: 3.5rem;
-    padding: 50;
+.white-text {
     color: white;
 }
 
-.container{
-height: 100%;
-align-content: center;
+.dark-text {
+    color: #1D394E;
 }
 
-.card{
-height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5);
+.webooks-text-yellow {
+    color: #FFBD59;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+.webooks-bg-yellow {
+    background-color: #FFBD59;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.bg-light {
+    background-color: #D7C9B5;
 }
 
-.card-header h3{
-color: white;
+.btn-yellow {
+    color: #1D394E;
+    background-color: #FFBD59;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+.btn-yellow:hover {
+    color: #1D394E;
+    background-color: #C69245;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0;
+.btn-outline-yellow {
+    border-color: #FFBD59;
+    color: #FFBD59;
 }
 
-input:focus{
-outline: 0 0 0 0;
-box-shadow: 0 0 0 0;
-
+.btn-outline-yellow:hover {
+    color: #1D394E;
+    background-color: #FFBD59;
 }
 
-.remember{
-color: white;
+.header-link {
+    color: white;
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.header-link:hover {
+    color: #D8CBB8;
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.header-link-secondary {
+    color: #9D9385;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
-}
-
-.links{
-color: white;
-}
-
-.links a{
-margin-left: 4px;
+.header-link-secondary:hover {
+    color: #817A6E;
 }
