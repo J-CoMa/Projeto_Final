@@ -1,0 +1,97 @@
+<?php
+session_start();
+include './includes/config.php';
+$book_id = $_GET['id'];
+$sql = "SELECT * FROM t_book WHERE book_id = $book_id";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
+  <title>WeBooks - Borrow</title>
+</head>
+
+<body>
+  <section id="header">
+    <div class="container">
+      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="./login2.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
+          <span class="fs-4 serif-font text-white"><span class="webooks-text-yellow">WE</span>BOOKS</span>
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="./login2.php" class="nav-link px-2 header-link">Home</a></li>
+          <li><a href="./list_books.php" class="nav-link px-2 header-link-secondary">Library</a></li>
+          <li><a href="./owned_books.php" class="nav-link px-2 header-link">Your Books</a></li>
+          <li><a href="#" class="nav-link px-2 header-link">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 header-link">About</a></li>
+        </ul>
+      </header>
+    </div>
+  </section>
+
+  <section id="body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card col-11 col-xxl-6 col-xl-7 col-lg-8 col-md-10 mb-4">
+          <div class="card-body">
+            <h3 class="mb-4">Borrow Book</h3>
+            <form action="./borrow_book1.php" method="post" class="needs-validation">
+              <input type="hidden" name="book_id" value="<?php echo $row['book_id']; ?>">
+              <div class="row mb-2 mb-sm-1">
+                <label for="title" class="col-sm-3 col-form-label">Title:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="title" readonly class="form-control-plaintext" value="<?php echo $row['title']; ?>" required>
+                </div>
+              </div>
+              <div class="row mb-2 mb-sm-1">
+                <label for="genre" class="col-sm-3 col-form-label">Genre:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="genre" readonly class="form-control-plaintext" value="<?php echo $row['genre']; ?>" required>
+                </div>
+              </div>
+              <div class="row mb-2 mb-sm-1">
+                <label for="publish_year" class="col-sm-3 col-form-label">Publish Year:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="publish_year" readonly class="form-control-plaintext" value="<?php echo $row['publish_year']; ?>" required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="isbn" class="col-sm-3 col-form-label">ISBN:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="isbn" readonly class="form-control-plaintext" value="<?php echo $row['isbn']; ?>" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="loan_date" class="form-label">Loan Date:</label>
+                <input type="date" name="loan_date" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="expiration_date" class="form-label">Expiration_Date:</label>
+                <input type="date" name="expiration_date" class="form-control" required>
+              </div>
+
+              <div class="text-center">
+                <input type="submit" value="Borrow Book" class="btn btn-yellow">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="list_books.php">Return to the Book List</a>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

@@ -8,4 +8,4 @@ if ($conn->query($sql) === TRUE) {
     echo "Error deleting: " . $conn->error;
 }
 $conn->close();
-header('Location: list_books.php');
+header('Location: list_books_admin.php');
