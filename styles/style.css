@@ -1,7 +1,8 @@
 @import url('https://fontlibrary.org//face/cmu-serif');
 
 .serif-font {
-    font-family: "CMUSerifRoman", serif;;
+    font-family: "CMUSerifRoman", serif;
+    ;
 }
 
 .white-text {

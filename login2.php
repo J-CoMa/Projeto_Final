@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" class="h-100" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,7 @@ session_start();
   <title>WeBooks</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
   <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a href="./login2.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -25,21 +25,19 @@ session_start();
         <li><a href="./login2.php" class="nav-link px-2 header-link-secondary">Home</a></li>
         <li><a href="./list_books.php" class="nav-link px-2 header-link">Library</a></li>
         <li><a href="./owned_books.php" class="nav-link px-2 header-link">Your Books</a></li>
-        <li><a href="#" class="nav-link px-2 header-link">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 header-link">About</a></li>
       </ul>
 
       <?php
       include './includes/config.php';
-      $sql = "SELECT * FROM t_user WHERE user_id = '$_SESSION[user_id]'";
-      $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-      $row = mysqli_fetch_assoc($result);
+      $sql_header = "SELECT * FROM t_user WHERE user_id = '$_SESSION[user_id]'";
+      $result_header = mysqli_query($conn, $sql_header) or die(mysqli_error($conn));
+      $row_header = mysqli_fetch_assoc($result_header);
       ?>
 
       <ul class="navbar-nav col-md-3 text-end">
         <li class="nav-item dropdown">
           <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php echo $row['first_name'] . " " . $row['last_name']; ?>
+            <?php echo $row_header['first_name'] . " " . $row_header['last_name']; ?>
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="./user_profile.php">Profile</a></li>
@@ -62,6 +60,12 @@ session_start();
       </div>
     </div>
   </div>
+
+  <footer class="footer mt-auto pt-3">
+    <div class="container">
+      <p class="text-center text-body-secondary border-top py-3 m-0">© João Martins. All Rights Reserved</p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
