@@ -28,6 +28,26 @@ session_start();
         <li><a href="#" class="nav-link px-2 header-link">FAQs</a></li>
         <li><a href="#" class="nav-link px-2 header-link">About</a></li>
       </ul>
+
+      <?php
+      include './includes/config.php';
+      $sql = "SELECT * FROM t_user WHERE user_id = '$_SESSION[user_id]'";
+      $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+      $row = mysqli_fetch_assoc($result);
+      ?>
+
+      <ul class="navbar-nav col-md-3 text-end">
+        <li class="nav-item dropdown">
+          <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php echo $row['first_name'] . " " . $row['last_name']; ?>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="./user_profile.php">Profile</a></li>
+            <li><a class="dropdown-item" href="#">History</a></li>
+            <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
     </header>
 
     <div class="container col-xxl-8 px-4 py-5">
@@ -42,6 +62,8 @@ session_start();
       </div>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

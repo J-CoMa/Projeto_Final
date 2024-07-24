@@ -1,5 +1,13 @@
 <?php
 session_start();
+include './includes/config.php';
+$user_id = $_SESSION['user_id'];
+/* $sql = "SELECT book_id FROM t_loan WHERE user_id = $user_id"; */
+$sql = "SELECT * FROM t_book
+        INNER JOIN t_loan ON t_book.book_id = t_loan.book_id
+        WHERE t_loan.user_id = $user_id
+        AND t_loan.delivery_date IS NULL";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +41,42 @@ session_start();
     </div>
   </section>
 
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-4 mb-4 border-bottom">
+      <h1 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">Your Books</h1>
+    </div>
+  </div>
+
+  <section id="listing">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-md-between pb-4 mb-4">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Publish Year</th>
+              <th>ISBN</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <?php while ($row = $result->fetch_assoc()) : ?>
+              <tr>
+                <td><?php echo $row['title']; ?></td>
+                <td><?php echo $row['genre']; ?></td>
+                <td><?php echo $row['publish_year']; ?></td>
+                <td><?php echo $row['isbn']; ?></td>
+                <td>
+                  <a class="btn btn-outline-yellow" href="./loan_details.php?book_id=<?php echo $row['book_id']; ?>" role="button">Details</a>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </body>
 
 </html>

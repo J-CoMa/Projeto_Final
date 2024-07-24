@@ -26,20 +26,20 @@ session_start();
     include './includes/config.php';
     $sql = "SELECT * FROM t_user WHERE email = '$_POST[email]'";
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $line = mysqli_fetch_assoc($result);
-    if ($line == null) {
+    $row = mysqli_fetch_assoc($result);
+    if ($row == null) {
       echo "<div class='text-center mb-5'>
               <h3 class='mb-4'>Non-existant user</h3>
               <input type='button' value='Try Again' class='btn btn-yellow' onclick=window.open('index.html','_self')>
             </div>";
     } else {
-      if (password_verify($_POST['password'], $line['password'])) {
+      if (password_verify($_POST['password'], $row['password'])) {
         echo "<div class='text-center mb-5'>
-                <h2  class='mb-4'>Welcome " . $line['first_name'] . " " . $line['last_name'] . "</h2>
+                <h2  class='mb-4'>Welcome " . $row['first_name'] . " " . $row['last_name'] . "</h2>
                 <input type='button' value='Continue' class='btn btn-yellow' onclick=window.open('login2.php','_self')>
               </div>";
-        $_SESSION['user_id'] = $line['user_id'];
-        $_SESSION['email'] = $line['email'];
+        $_SESSION['user_id'] = $row['user_id'];
+        $_SESSION['email'] = $row['email'];
       } else {
         echo "<div class='text-center mb-5'>
                 <h3 class='mb-4'>Incorrect password</h3>
