@@ -13,6 +13,34 @@
     color: #1D394E;
 }
 
+.webooks-text-admin {
+    color: #E03C44;
+}
+
+.webooks-bg-admin {
+    background-color: #E03C44;
+}
+
+.btn-admin {
+    color: #1D394E;
+    background-color: #E03C44;
+}
+
+.btn-admin:hover {
+    color: #1D394E;
+    background-color: #A52C32;
+}
+
+.btn-outline-admin {
+    border-color: #E03C44;
+    color: #E03C44;
+}
+
+.btn-outline-admin:hover {
+    color: #1D394E;
+    background-color: #E03C44;
+}
+
 .webooks-text-yellow {
     color: #FFBD59;
 }
