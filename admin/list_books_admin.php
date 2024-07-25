@@ -1,7 +1,7 @@
 <?php
 include '../includes/config.php';
-$sql = "SELECT * FROM t_book";
-$result = $conn->query($sql);
+$sql_book = "SELECT * FROM t_book";
+$result_book = $conn->query($sql_book);
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +27,7 @@ $result = $conn->query($sql);
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="./index.html" class="nav-link px-2 header-link">Home</a></li>
                     <li><a href="./list_users.php" class="nav-link px-2 header-link">User List</a></li>
+                    <li><a href="./list_authors.php" class="nav-link px-2 header-link">Author List</a></li>
                     <li><a href="./list_books_admin.php" class="nav-link px-2 header-link-secondary">Library</a></li>
                     <li><a href="./loans_list.php" class="nav-link px-2 header-link">Loans</a></li>
                 </ul>
@@ -55,6 +56,7 @@ $result = $conn->query($sql);
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
+                            <!-- <th>Author</th> -->
                             <th>Genre</th>
                             <th>Publish Year</th>
                             <th>ISBN</th>
@@ -62,16 +64,16 @@ $result = $conn->query($sql);
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <?php while ($row = $result->fetch_assoc()) : ?>
+                        <?php while ($row_book = $result_book->fetch_assoc()) : ?>
                             <tr>
-                                <td><?php echo $row['book_id']; ?></td>
-                                <td><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['genre']; ?></td>
-                                <td><?php echo $row['publish_year']; ?></td>
-                                <td><?php echo $row['isbn']; ?></td>
+                                <td><?php echo $row_book['book_id']; ?></td>
+                                <td><?php echo $row_book['title']; ?></td>
+                                <td><?php echo $row_book['genre']; ?></td>
+                                <td><?php echo $row_book['publish_year']; ?></td>
+                                <td><?php echo $row_book['isbn']; ?></td>
                                 <td>
-                                    <a class="btn btn-outline-light me-2 mb-lg-0 mb-2" href="edit_book.php?id=<?php echo $row['book_id']; ?>" role="button">Edit</a>
-                                    <a class="btn btn-outline-danger" href="delete_book.php?id=<?php echo $row['book_id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                                    <a class="btn btn-outline-light me-2 mb-lg-0 mb-2" href="edit_book.php?id=<?php echo $row_book['book_id']; ?>" role="button">Edit</a>
+                                    <a class="btn btn-outline-danger" href="delete_book.php?id=<?php echo $row_book['book_id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

@@ -1,3 +1,31 @@
+<?php
+include '../includes/config.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $user_id = $_POST['user_id'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $email = $_POST['email'];
+  $tmp = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $birthdate = $_POST['birthdate'];
+  $phone = $_POST['phone'];
+  $address = $_POST['address'];
+  $sql = "UPDATE t_user SET first_name='$first_name', last_name='$last_name', email='$email',
+password='$tmp', birthdate='$birthdate', phone='$phone', address='$address' WHERE user_id=$user_id";
+  if ($conn->query($sql) === TRUE) {
+    echo "User successfully updated!";
+    header('Location: list_users.php');
+  } else {
+    echo "Erro: " . $sql . "<br>" . $conn->error;
+  }
+} else {
+  $user_id = $_GET['user_id'];
+  $sql = "SELECT * FROM t_user WHERE user_id=$user_id";
+  $result = $conn->query($sql);
+  $book = $result->fetch_assoc();
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-100" data-bs-theme="dark">
 
@@ -20,6 +48,7 @@
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="./index.html" class="nav-link px-2 header-link">Home</a></li>
         <li><a href="./list_users.php" class="nav-link px-2 header-link">User List</a></li>
+        <li><a href="./list_authors.php" class="nav-link px-2 header-link">Author List</a></li>
         <li><a href="./list_books_admin.php" class="nav-link px-2 header-link">Library</a></li>
         <li><a href="./loaned_books.php" class="nav-link px-2 header-link">Loans</a></li>
       </ul>
@@ -42,7 +71,8 @@
         <div class="card col-11 col-xxl-6 col-xl-7 col-lg-8 col-md-10 mb-4">
           <div class="card-body">
             <h3 class="mb-4">Edit Profile</h3>
-            <form action="update_profile.php" method="post" class="needs-validation">
+            <form action="edit_user.php" method="post" class="needs-validation">
+              <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>" readonly required>
               <div class="row">
                 <div class="col-12 col-sm-6 mb-3">
                   <label for="first_name" class="form-label">First Name:</label>
