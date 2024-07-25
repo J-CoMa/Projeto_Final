@@ -41,6 +41,7 @@ session_start();
               </div>";
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['email'] = $row['email'];
+        $_SESSION['admin'] = $row['admin'];
       } else {
         echo "<div class='text-center mb-5'>
                 <h3 class='mb-4'>Incorrect password</h3>

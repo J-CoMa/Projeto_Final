@@ -1,5 +1,12 @@
 @import url('https://fontlibrary.org//face/cmu-serif');
 
+#errorimg {
+    background-image: url(../assets/images/ICU.gif);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
 .serif-font {
     font-family: "CMUSerifRoman", serif;
     ;

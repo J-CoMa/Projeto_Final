@@ -10,6 +10,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/style.css">
+  <?php include './includes/validation.php'; ?>
   <title>WeBooks - User Profile</title>
 </head>
 
@@ -42,6 +43,10 @@ session_start();
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="./user_profile.php">Profile</a></li>
             <li><a class="dropdown-item" href="#">History</a></li>
+            <?php if ($row['admin'] == 1) {
+              echo "<li><a class='dropdown-item text-info' href='./admin/index.php'>Admin Page</a></li>";
+            }
+            ?>
             <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
           </ul>
         </li>

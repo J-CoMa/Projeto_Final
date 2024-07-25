@@ -1,16 +1,5 @@
 <?php
 session_start();
-include './includes/config.php';
-$book_id = $_GET['book_id'];
-$user_id = $_SESSION['user_id'];
-$sql_book = "SELECT * FROM t_book WHERE book_id = $book_id";
-$result_book = $conn->query($sql_book);
-$row_book = $result_book->fetch_assoc();
-$sql_loan = "SELECT * FROM t_loan WHERE book_id = $book_id
-  AND user_id = $user_id AND delivery_date IS NULL";
-$result_loan = $conn->query($sql_loan);
-$row_loan = $result_loan->fetch_assoc();
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +10,7 @@ $conn->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/style.css">
+  <?php include './includes/validation.php'; ?>
   <title>WeBooks - Loan Details</title>
 </head>
 
@@ -54,6 +44,10 @@ $conn->close();
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="./user_profile.php">Profile</a></li>
               <li><a class="dropdown-item" href="#">History</a></li>
+              <?php if ($row_header['admin'] == 1) {
+                echo "<li><a class='dropdown-item text-info' href='./admin/index.php'>Admin Page</a></li>";
+              }
+              ?>
               <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
             </ul>
           </li>
@@ -61,6 +55,20 @@ $conn->close();
       </header>
     </div>
   </section>
+
+  <?php
+  include './includes/config.php';
+  $book_id = $_GET['book_id'];
+  $user_id = $_SESSION['user_id'];
+  $sql_book = "SELECT * FROM t_book WHERE book_id = $book_id";
+  $result_book = $conn->query($sql_book);
+  $row_book = $result_book->fetch_assoc();
+  $sql_loan = "SELECT * FROM t_loan WHERE book_id = $book_id
+  AND user_id = $user_id AND delivery_date IS NULL";
+  $result_loan = $conn->query($sql_loan);
+  $row_loan = $result_loan->fetch_assoc();
+  $conn->close();
+  ?>
 
   <section id="body">
     <div class="container">

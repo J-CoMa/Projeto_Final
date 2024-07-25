@@ -1,10 +1,5 @@
 <?php
 session_start();
-include './includes/config.php';
-$book_id = $_GET['id'];
-$sql = "SELECT * FROM t_book WHERE book_id = $book_id";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +10,7 @@ $row = $result->fetch_assoc();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/style.css">
+  <?php include './includes/validation.php'; ?>
   <title>WeBooks - Borrow</title>
 </head>
 
@@ -48,6 +44,10 @@ $row = $result->fetch_assoc();
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="./user_profile.php">Profile</a></li>
               <li><a class="dropdown-item" href="#">History</a></li>
+              <?php if ($row_header['admin'] == 1) {
+                echo "<li><a class='dropdown-item text-info' href='./admin/index.php'>Admin Page</a></li>";
+              }
+              ?>
               <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
             </ul>
           </li>
@@ -55,6 +55,14 @@ $row = $result->fetch_assoc();
       </header>
     </div>
   </section>
+
+  <?php
+  include './includes/config.php';
+  $book_id = $_GET['id'];
+  $sql = "SELECT * FROM t_book WHERE book_id = $book_id";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  ?>
 
   <section id="body">
     <div class="container">
